@@ -1,0 +1,23 @@
+1.semVer: semantic versioning. 
+It includes: major(big change), minor(new features added), patch version(bugs fixed).
+
+major components invloved in node.js env:
+v8 engine: 
+uses JIT(just in time) compilation. 
+converts the js to machine language.
+It only handles call stack and memory heap.
+
+libUv:
+it's a completely C library.
+it handles Event Loop, Async I/O, Timers, os, async I/O.
+since, js is single threaded. libUv provides the external threads.
+node bindings acts as a bridge between js and libUv.
+
+compiler v/s interpreter:
+| Feature         | Compiler                                | Interpreter                   |
+| --------------- | --------------------------------------- | ----------------------------- |
+| Translation     | Converts **entire code at once**        | Converts **line by line**     |
+| Execution       | Runs after compilation                  | Executes immediately          |
+| Speed           | Faster execution                        | Slower execution              |
+| Error detection | Shows errors **after full compilation** | Shows errors **line by line** |
+
