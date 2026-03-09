@@ -21,3 +21,8 @@ compiler v/s interpreter:
 | Speed           | Faster execution                        | Slower execution              |
 | Error detection | Shows errors **after full compilation** | Shows errors **line by line** |
 
+> globalThis refers to the global object of the current runtime environment.
+> typeof null is an object.
+> parseInt converts the strings into number and ignores zeros.
+> usecase of spread operator in objects and arrays are slightly different.
+> node monitores the file : --watch filename.js 
