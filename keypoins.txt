@@ -26,3 +26,8 @@ compiler v/s interpreter:
 > parseInt converts the strings into number and ignores zeros.
 > usecase of spread operator in objects and arrays are slightly different.
 > node monitores the file : --watch filename.js 
+
+NPM: is a package mangager where libraries, framewroks are available.
+. installed dependencies(libraries) & versions are stored inside package.json.
+. code of the installed dependencies are stored inside node modules.
+. exact version of dependencies are stored inside package.lock.json.
