@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const envSchema = z.object({
-  PORT: z.string().default('5000')
+  PORT: z.string().optional()
 })
 
 function createEnv(env: NodeJS.ProcessEnv) {
