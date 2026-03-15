@@ -31,3 +31,6 @@ NPM: is a package mangager where libraries, framewroks are available.
 . installed dependencies(libraries) & versions are stored inside package.json.
 . code of the installed dependencies are stored inside node modules.
 . exact version of dependencies are stored inside package.lock.json.
+. if any package shows "DT" in npm then it doesn't have types. (e.g: express). ***
+. use "npm i @types/packagename -D" for installing types to the package. ***
+. use "npm i @types/node -D" for node built in packgaes. ***
