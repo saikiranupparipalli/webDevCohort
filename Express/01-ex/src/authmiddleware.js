@@ -9,33 +9,46 @@ function block_four() {
       const token = req.headers["x-auth-token"];
 
       if (!token)
-        return res.status(401).json({ error: "no token, please login" });
+        return res.status(401).json({ error: "no token, please provide the token in headers" });
 
       if (token !== "secret-chaicode")
         return res.status(403).json({ error: "Invalid token" });
 
-      req.user = { id: 1, name: "saikiran", role: "student" }; //- not effect the code working.
+      req.user = { id: 1, name: "saikiran", role: "architect" }; //- not effect the code working.
       next();
     }
 
+    function getRole(role) {
+      return (req, res, next) => {
+        if (!req.user || !role.includes(req.user.role)) {
+          return res.status(403).json({ error: `role ${req.user.role} is not available..` })
+        } else {
+          res.json({message: `role ${req.user.role} is there..`})
+        }
+          next()
+      }
+    }
+    
+    // --routes
     app.get("/text", (_, res) => {
       res.send("Hey, how are you?");
     });
-
-   
-    app.post('/data', (req, res) => {
+    
+    app.get('/role', authMe,  getRole(['teacher', 'doctor', 'architect']))
+    
+    
+    app.post('/data', authMe, (req, res) => {
       const { id, name, role } = req.body
       res.json({ id, name, role })
     })
 
-    const server = app.listen(0, async () => {
-      const port = server.address().port;
-      const base = `http://127.0.0.1:${port}`;
-
-      console.log(`server is running on ${base} port...`);
+    const port = 8080
+    app.listen(port, async () => {
+      
+      console.log(`server is running on port ${port}..`)
       
       try {
-        const response = await fetch(`${base}/data`, {
+        const response = await fetch(`http://127.0.0.1:${port}/data`, {
           method: 'POST',
           headers: {
             'content-Type': 'application/json',
@@ -53,7 +66,8 @@ function block_four() {
         throw new error
       }
       
-    });
+    }) //- new server 
+    
 
     resolve();
   }); //- promise closure
