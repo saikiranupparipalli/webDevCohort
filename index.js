@@ -1,6 +1,4 @@
-import express from "express"; 
-
-const obj = ["saikiran", 22];
+ const obj = ["saikiran", 22];
  // const obj = {name: "saikiran", age: 22};
  console.log(obj);
  console.log(typeof obj);

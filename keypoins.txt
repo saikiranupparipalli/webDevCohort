@@ -1,9 +1,9 @@
-1.semVer: semantic versioning. 
+1.semVer: semantic versioning.
 It includes: major(big change), minor(new features added), patch version(bugs fixed).
 
 major components invloved in node.js env:
-v8 engine: 
-uses JIT(just in time) compilation. 
+v8 engine:
+uses JIT(just in time) compilation.
 converts the js to machine language.
 It only handles call stack and memory heap.
 
@@ -25,7 +25,7 @@ compiler v/s interpreter:
 > typeof null is an object.
 > parseInt converts the strings into number and ignores zeros.
 > usecase of spread operator in objects and arrays are slightly different.
-> node monitores the file : --watch filename.js 
+> node monitores the file : --watch filename.js
 
 NPM: is a package mangager where libraries, framewroks are available.
 . installed dependencies(libraries) & versions are stored inside package.json.
@@ -34,3 +34,5 @@ NPM: is a package mangager where libraries, framewroks are available.
 . if any package shows "DT" in npm then it doesn't have types. (e.g: express). ***
 . use "npm i @types/packagename -D" for installing types to the package. ***
 . use "npm i @types/node -D" for node built in packgaes. ***
+-----------------------------------------------------------------------------
+. ctrl + N, to create new terminal.

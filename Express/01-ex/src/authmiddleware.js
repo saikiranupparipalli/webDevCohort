@@ -16,8 +16,8 @@ function block_four() {
 
       req.user = { id: 1, name: "saikiran", role: "architect" }; //- not effect the code working.
       next();
-    }
-
+    } //--middleware/1
+    
     function getRole(role) {
       return (req, res, next) => {
         if (!req.user || !role.includes(req.user.role)) {
@@ -27,7 +27,7 @@ function block_four() {
         }
           next()
       }
-    }
+    } //-middleware/2
     
     // --routes
     app.get("/text", (_, res) => {
@@ -66,7 +66,7 @@ function block_four() {
         throw new error
       }
       
-    }) //- new server 
+    }) //--server 
     
 
     resolve();
