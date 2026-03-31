@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "passoword is required"],
     minlength: 8,
     maxlength: 45,
+    select: false,
   },
   role: {
     type: String,
@@ -31,7 +32,10 @@ const userSchema = new mongoose.Schema({
     defalut: false
   },
   
-  verificationToken: {type: String, select: false}
-})
+  verificationToken: {type: String, select: false},
+  refreshToken: {type: String, select: false},
+  resetPasswordToken: {type: String, select: false},
+  resetPasswordExpires: {type: Date, select: false}
+}, {timestamps: true})
 
 export default mongoose.model("User", userSchema)
