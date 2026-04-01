@@ -1,6 +1,6 @@
 1.semVer: semantic versioning.
 It includes: major(big change), minor(new features added), patch version(bugs fixed).
-
+--------------------------------------------
 major components invloved in node.js env:
 v8 engine:
 uses JIT(just in time) compilation.
@@ -26,7 +26,7 @@ compiler v/s interpreter:
 > parseInt converts the strings into number and ignores zeros.
 > usecase of spread operator in objects and arrays are slightly different.
 > node monitores the file : --watch filename.js
-
+-------------------------------------------------------------------------------
 NPM: is a package mangager where libraries, framewroks are available.
 . installed dependencies(libraries) & versions are stored inside package.json.
 . code of the installed dependencies are stored inside node modules.
@@ -36,3 +36,19 @@ NPM: is a package mangager where libraries, framewroks are available.
 . use "npm i @types/node -D" for node built in packgaes. ***
 -----------------------------------------------------------------------------
 . ctrl + N, to create new terminal.
+------------------------------------
+RESTFUL API(PART- 1):
+. static keyword is used to define methods and properties that belongs to class itself.
+. super keyword is used inside classes to access the things from parent class.
+. Zod is a data validation lib.
+. alternatives of Zod are joi, yup, arktype, express validator
+. DTO: defines shape of the data, libraries validate the data.
+. DTO is concept.***
+. common folder- to write the global modules.
+. modules folder- to write the seperate modules.
+.routes- /login, /getme , models- businesslogic , models- structure/shape/schema , utils- DB, mails, service- businesslogic.
+.mongoose is lib, it can be also called as ORM, ODM.***
+.mongoose acts as a middle layer b/w mongodb and server.***
+.ORM(OBJECT RELATIONAL MAPPER)
+.ODM(OBJECT DOCUMENT MAPPER)
+----------------------------------------------------

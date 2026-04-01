@@ -1,0 +1,45 @@
+							BACKEND LAYERED ARCHITECTURE.
+
+common modules: 
+connected mongodb using mongoose 
+created global base.dto file
+base.dto returns value and error after joi validation.
+created global api_error, api_response files 
+api errors, api response files contains static methods.
+created global validate.middleware.
+validate.middleware handles the req.body.
+
+separate modules:
+created register.dto file
+register.dto contains the schema.
+register.dto extends the class base.dto and provides schema.
+base.dto validates/scans schema with req.body of user using joi
+base.dto directly returns value or errors of data to validate.middleware.dto.
+created validate.middleware file
+validate.middleware throws error or sends the req.body to routes(calls next()).
+created auth.controller file.
+created auth.service file.
+created auth.models file.
+controller calls auth.service
+	-auth.service:
+	-checks if email exists in auth.model
+	-creates user in auth.model
+	-returns user OR throws error
+controller sends response (status, message, data)
+
+
+working:
+user hits route
+sends details (name, email, password, role)
+middleware validates data
+if valid → controller runs
+controller calls auth.service
+	auth.service:
+	checks if email exists in auth.model
+	creates user in auth.model
+	returns user OR throws error
+controller sends response (status, message, data)
+from client pov controllers created first 
+from server pov service created first.
+
+
