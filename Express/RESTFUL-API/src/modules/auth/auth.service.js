@@ -26,6 +26,9 @@ const register = async ({ name, email, password, role }) => {
     const user = await User.findOne({ email }).select("+password")
     if (!user) throw ApiError.unauthorized("Invalid user or password")
     
+    const isMatch = await user.comparePassword(password)
+    if (!isMatch) throw ApiError.unauthorized("Invalid email or password")
+    
     if (!user.isVerified) {
       throw ApiError.forbidden("Please verify your email before logging.")
     }
@@ -54,7 +57,7 @@ const refresh = async (token) => {
     throw ApiError.unauthorized("Invalid refresh token")
   }
   
-  const generateAccessToken({ id: user._id, role: user.role })
+  const accessToken = generateAccessToken({ id: user._id, role: user.role })
   return { accessToken }
   
 }
@@ -73,4 +76,10 @@ const forgotPassword = async (email) => {
   
   await user.save()
 }
-export default register
+
+const getMe = async (userId) => {
+  const user = await User.findById(userId)
+  if (!user) throw ApiError.notfound("User not found")
+  return user;
+}
+export { register, login, refresh, forgotPassword, logOut}
