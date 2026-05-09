@@ -1,0 +1,8 @@
+> server.js contains server code.
+> app.js exports libraries. 
+> NODE_ENV=development/prod helps node.js to skip logs or not.
+> config -> db.js file connects the DB
+> utils -> globally accessible api-errors, res's files.
+> Dto -> dto.js contains global dto combining joi validation
+- DTOs are used to ensure the client sends all required data in the expected structure.
+- Validation libraries are used to validate each field, like checking email format, password length, required values, etc.
