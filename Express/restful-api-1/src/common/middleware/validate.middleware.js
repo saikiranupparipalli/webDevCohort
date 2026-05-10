@@ -10,6 +10,6 @@ const validate = (dtoClass) => {
     next()
   }
 }
-validate()
+// validate()
 
 export default validate

@@ -6,3 +6,31 @@
 > Dto -> dto.js contains global dto combining joi validation
 - DTOs are used to ensure the client sends all required data in the expected structure.
 - Validation libraries are used to validate each field, like checking email format, password length, required values, etc.
+> middleware -> validate.middleware.js file validates the req.body
+> modules -> auth -> auth.model.js file contains schema
+> modules -> dto -> register.dto.js file rewrites the schema we wrote in basedto
+> modules -> auth -> auth.routes.js validates the data came from register.dto using validate.middleware.js
+combination of http method + end point is known as route.
+http methods- get, post, patch, put, delete
+end-points- /login, /products, /login
+ex: of route:- route.get("/login", (req, res)=>{
+res.json("this is the login page")
+)}
+
+
+
+
+
+
+
+
+
+
+NOTE: 
+Client Request
+      ↓
+auth.controller.js
+      ↓
+auth.service.js
+      ↓
+Database
