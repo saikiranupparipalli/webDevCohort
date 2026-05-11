@@ -16,4 +16,4 @@ const register = async ({ name, email, password, role }) => {
     verificationToken: hashedToken
   })
 }
-export {register}
+export {register}                                                                                         

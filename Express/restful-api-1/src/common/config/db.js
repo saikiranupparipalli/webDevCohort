@@ -8,7 +8,7 @@ const db = async () => {
 };
 db().catch((err) => {
   console.log(`DB is not connected`, err);
-  process.emit(1);
+  process.exit(1);
 });
 
 export default db;
