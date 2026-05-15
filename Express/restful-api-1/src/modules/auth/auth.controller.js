@@ -6,4 +6,8 @@ const register = async (req, res) =>{
   ApiResponse.created(res, "registration success", user)
 }
 
+const login = async(req, res)=>{
+  const login = await authService.register(req.body)
+  ApiResponse.c
+}
 export {register}

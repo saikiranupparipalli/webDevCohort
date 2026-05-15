@@ -23,6 +23,9 @@ const login = async ({ email, password }) => {
   const user = await User.findOne({ email }).select("++password");
   if (!user) throw ApiError.unauthorized("wrong email or password");
 
+  const isMatch = await user.comparePassword(password)
+  if(!isMatch) throw ApiError.unauthorized("invalid email or password")
+
   if (!user.isVerfied) {
     throw ApiError.forbidden("please verify email before loginIn");
   }
@@ -69,4 +72,4 @@ const forgotPassword = async(email)=>{
   user.resetPasswordExpires = Date.now() + 15 * 60 * 1000
   await user.save()
 }
-export { register };
+export { register, login, refresh, forgotPassword };

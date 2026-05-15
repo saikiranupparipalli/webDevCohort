@@ -1,10 +1,10 @@
 import crypto from "crypto"
 import jwt from "jsonwebtoken"
-
+//access, refresh tokens are secret key's that server checks with, when it wants to give access to user direclty(without entering the email, password)
 const generateAccessToken = (payload)=>{
     jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
       expiresIn: process.env.JWT_ACCESS_EXPIRES_IN || "20min"
-    })
+    }) 
 }
 
 const verifyAccessToken = (token)=>{

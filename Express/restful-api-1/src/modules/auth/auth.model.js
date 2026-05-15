@@ -37,4 +37,14 @@ const userSchema = new mongoose.Schema({
   resetPasswordExpires:{type: Date, select: false}//link(email) sent to user which expires after sometime
 },{timestamps: true})
 
+//hashing the password before saving.
+userSchema.pre('save', async (next)=>{
+  if(!this.isModified("password")) return next()
+  this.password = await bcrypt.hash(this.password, 12)
+  next()
+})
+userSchema.methods.comparePassword = async (userTextPassword)=>{
+ return bcrypt.compare(userTextPassword, this.password)
+}
+
 export default mongoose.model("User", userSchema)
