@@ -8,6 +8,7 @@ const authenticate = async(req, res, next)=>{
     }
     if(!token) throw ApiError.unauthorized("not authenticated")
     const decoded = verifyAccessToken(token)
+
     const user = await User.findById(decoded.findById)
     if(!user) throw ApiError.unauthorized("user no longer exist")
     
