@@ -7,10 +7,12 @@ import {
   verifyAccessToken,
   verifyRefreshToken,
 } from "../../common/utils/jwt.utils.js";
+import { sendMail } from "../../common/utils/email.js";
 
 const hashToken = (token) =>
   crypto.createhash("sha256").update(token).digest("hex");
 
+//register
 const register = async ({ name, email, password, role }) => {
   const existingUser = await User.findOne({ email });
   if (existingUser) ApiError.conflict("User already exists.");
@@ -24,6 +26,12 @@ const register = async ({ name, email, password, role }) => {
     role,
     verificationToken: hashedToken,
   });
+
+  try {
+    await sendMail(email, token);
+  } catch (err) {
+    console.log("something went wrong", err);
+  }
 };
 //login
 const login = async ({ email, password }) => {
@@ -88,12 +96,21 @@ const forgotPassword = async (email) => {
   await user.save();
 };
 
+//logout
 const logOut = async (userId) => {
   const user = await User.findById(userId);
   if (!user) {
     throw ApiError.forbidden("User not found");
   }
-  await refreshToken.deleteMany({ userId: user._id });
+  // await refreshToken.deleteMany({ userId: user._id });
+  await User.findByIdAndUpdate(userId, { refreshToken: null });
 };
 
-export { register, login, refresh, forgotPassword, logOut};
+//getme
+const getMe = async (userId) => {
+  const user = await User.findById(userId);
+  if (!user) ApiError.forbidden("user not found");
+  return user;
+};
+
+export { register, login, refresh, forgotPassword, logOut, getMe };

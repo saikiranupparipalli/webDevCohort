@@ -30,4 +30,10 @@ const logOut = async(req, res)=>{
 
   ApiResponse.ok("LogOut successful")
 }
-export { register };
+
+const getMe = async(req, res)=>{
+  const user = await authService.getMe(req.user.id)
+  ApiResponse.ok(res,"user profile", user)
+
+}
+export { register, login, logOut, getMe};
