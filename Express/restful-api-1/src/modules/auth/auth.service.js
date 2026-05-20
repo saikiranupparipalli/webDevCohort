@@ -113,4 +113,15 @@ const getMe = async (userId) => {
   return user;
 };
 
-export { register, login, refresh, forgotPassword, logOut, getMe };
+const verifyEmail = async(token)=>{
+  const hashedToken = hashToken(token)
+  const user = await User.findOne({verificationToken: hashedToken}).select("+verificationToken")
+  if(!user) throw ApiError.forbidden("user not found")
+
+    user.isVerfied = true
+    user.verificationToken = undefined
+    await user.save()
+    return user
+}
+
+export { register, login, refresh, forgotPassword, logOut, getMe, verifyEmail};

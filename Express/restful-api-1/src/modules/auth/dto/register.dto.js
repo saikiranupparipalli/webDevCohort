@@ -5,8 +5,8 @@ class registerDto extends baseDto{
   static schema = Joi.object({
     name: Joi.string().min(2).max(12).required(),
     email: Joi.string().email().required(),
-    password: Joi.string().min(7).max(14).required().message("password must contains atleast 7 chars."),
-    role: Joi.string().valid("customer", "seller").default("customer")
+    password: Joi.string().min(7).max(14).message("password must contains atleast 7 chars.").required(),
+    role: Joi.string().valid("customer", "seller", "admin").default("customer")
   })
 }
 

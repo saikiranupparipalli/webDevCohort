@@ -24,16 +24,30 @@ const login = async (req, res) => {
   ApiResponse.ok(res, "Login successful", { accessCookie, refreshCookie });
 };
 
-const logOut = async(req, res)=>{
-   await authService.logOut(req.user.id)
-  res.clearCookie("refreshToken")
+const logOut = async (req, res) => {
+  await authService.logOut(req.user.id);
+  res.clearCookie("refreshToken");
 
-  ApiResponse.ok("LogOut successful")
-}
+  ApiResponse.ok("LogOut successful");
+};
 
-const getMe = async(req, res)=>{
-  const user = await authService.getMe(req.user.id)
-  ApiResponse.ok(res,"user profile", user)
+const getMe = async (req, res) => {
+  const user = await authService.getMe(req.user.id);
+  ApiResponse.ok(res, "user profile", user);
+};
 
-}
-export { register, login, logOut, getMe};
+// const verifyEmail = async (req, res) => {
+//   const user = await authService.verifyEmail(req.user.email);
+//   return ApiResponse.ok(res, "email verified", user);
+// };
+
+const verifyEmail = async (req, res) => {
+  try {
+    let token = req.params.token;
+    await authService.verifyEmail(req.token);
+    ApiResponse.ok(res, "email verified", token);
+  } catch (error) {
+    console.log("something went wrong in verifying email", error);
+  }
+};
+export { register, login, logOut, getMe, verifyEmail };
