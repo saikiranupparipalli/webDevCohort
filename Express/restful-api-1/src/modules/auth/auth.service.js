@@ -63,7 +63,7 @@ const login = async ({ email, password }) => {
   return { user: userObj, accessToken, refreshToken };
 };
 
-// refreshtoken generation
+// New refreshtoken generation
 const refresh = async (token) => {
   if (!token) {
     throw ApiError.unauthorized("Refresh token is missing.");
@@ -86,7 +86,7 @@ const refresh = async (token) => {
 
 // forgotPassword
 const forgotPassword = async (email) => {
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).select("+resetPasswordToken +resetPasswordExpires");
   if (!user) throw ApiError.notfound("user account not found");
 
   const { rawToken, hashedToken } = generateResetToken();
@@ -94,6 +94,8 @@ const forgotPassword = async (email) => {
   user.resetPasswordToken = hashedToken;
   user.resetPasswordExpires = Date.now() + 15 * 60 * 1000;
   await user.save();
+
+  return {user, rawToken}
 };
 
 //logout
@@ -105,7 +107,7 @@ const logOut = async (userId) => {
   // await refreshToken.deleteMany({ userId: user._id });
   await User.findByIdAndUpdate(userId, { refreshToken: null });
 };
-
+  
 //getme
 const getMe = async (userId) => {
   const user = await User.findById(userId);

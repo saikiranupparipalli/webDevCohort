@@ -7,7 +7,7 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { user, refreshToken, accessToken } = await authService.login(req.body);
+  const { user, accessToken, refreshToken } = await authService.login(req.body);
 
   const refreshCookie = res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
@@ -24,13 +24,11 @@ const login = async (req, res) => {
   ApiResponse.ok(res, "Login successful", { accessCookie, refreshCookie });
 };
 
-const logOut = async (req, res) => {
-  await authService.logOut(req.user.id);
-  res.clearCookie("refreshToken");
-
-  ApiResponse.ok("LogOut successful");
-};
-
+const logOut = async (req, res) => {   
+  const user = await authService.logOut(req.user.id)
+  res.clearcookie("refreshToken")
+  return ApiResponse.ok("Logout is successful", user)
+}
 const getMe = async (req, res) => {
   const user = await authService.getMe(req.user.id);
   ApiResponse.ok(res, "user profile", user);
