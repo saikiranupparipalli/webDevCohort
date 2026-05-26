@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.ts",
+    "start": "node src/index",
     "build": "tsc -p .",
-    "dev": "tsc-watch --onSuccess \"node src/index.ts\""
+    "dev": "tsx watch src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,12 @@
   },
   "type": "module",
   "devDependencies": {
-    "tsc-watch": "^7.2.0"
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.9.1",
+    "tsc-watch": "^7.2.0",
+    "tsx": "^4.22.3"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }
