@@ -8,7 +8,7 @@
     email: varchar('email', {length: 322}).notNull().unique(),
     emailVerified: boolean('email_verified').default(false).notNull(),
 
-    password: varchar('password', {length: 66}),
+    password: varchar('password', {length: 66}), 
     salt: text('salt'),
 
 
