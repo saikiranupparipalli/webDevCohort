@@ -8,5 +8,7 @@ const authenticationController = new AuthenticationController();
 
 authRouter.post(
   "/sign-up",
-  authenticationController.handleSignup.bind(AuthenticationController),
+  authenticationController.handleSignup.bind(authenticationController),
 );
+
+authRouter.post("/sign-in", authenticationController.handleSingin.bind(AuthenticationController),)
