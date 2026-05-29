@@ -6,9 +6,9 @@ export function createApp(): Express{
 
   app.use(express.json())
 
-  app.get("/me", (req, res)=>{
-   return  res.json({message: "welcome.!"})
-  })
+  // app.get("/me", (req, res)=>{
+  //  return  res.json({message: "welcome.!"})
+  // })
 
   app.use('/auth', authRouter)
   return app;

@@ -4,7 +4,8 @@ import { db } from "../../db/index.js";
 import { usersTable } from "../../db/schema.js";
 import { eq } from "drizzle-orm";
 import { createHmac, randomBytes } from "node:crypto";
-import { error } from "node:console";
+ 
+import { createToken, type userToken } from "./utils/token.js";
 
 class AuthenticationController {
   public async handleSignup(req: Request, res: Response) {
@@ -78,10 +79,24 @@ class AuthenticationController {
         .json({ message: `email or password is incorrect` });
 
        //todo: token
-    return res.json({ message: `signin Success`, data: { token: 1 } });
+
+       const token = createToken({id: userSelect.id})
+
+       
+    return res.json({ message: `signin Success`, data: { token } });
   }
 
-  
+  public async handleMe(req: Request, res: Response){
+    const {id} = req.user! as userToken
+
+    const [userResult] = await db.select().from(usersTable).where(eq(usersTable.id, id))
+
+    return res.json({
+      firstName: userResult?.firstName,
+      lastName: userResult?.lastName,
+      email: userResult?.email
+    })
+  }
 }
 
 export default AuthenticationController;
