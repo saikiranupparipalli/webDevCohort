@@ -27,5 +27,18 @@ INSERT INTO ipl_player(player_name, team_name, role, matches_played, runs, run_s
 
 SELECT * FROM ipl_player;
 
-SELECT * FROM ipl_player ORDER BY player_name DESC, runs > '600' DESC LIMIT 3
+SELECT * FROM ipl_player ORDER BY player_name DESC, runs > '600' DESC LIMIT 3;
 
+SELECT player_name, team_name FROM ipl_player ORDER BY run_scored > '700' DESC;
+
+SELECT player_name, runs FROM ipl_player WHERE team_name = 'RR' AND runs > '650' LIMIT 3;
+
+ SELECT team_name, role, runs FROM ipl_player ORDER BY run_scored > '700' OFFSET 3;
+
+SELECT player_name, role, runs ,(runs * 5)
+AS modified_runs
+FROM ipl_player LIMIT 5;
+
+SELECT distinct role  FROM ipl_player
+
+-- what is DQL?
