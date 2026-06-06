@@ -84,7 +84,7 @@ CREATE INDEX idx_<custom-colum-name> ON <TABLENAME>(<column name>) INCLUDE(<colu
 ** non key value index -> CREATE INDEX idx_<custom-colum-name> ON <TABLENAME>(<column name>) INCLUDE(<column name>)
 ** schema table will get locked when indexes are implemented.
 
-docker commands:
+****docker commands:
 
 docker postgres(ps)
 
