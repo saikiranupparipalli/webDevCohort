@@ -1,0 +1,96 @@
+db name- sql_db_class
+container- sql_db
+
+-------SQL COMMANDS--------------
+PRIMARY KEY
+ALTER TABLE
+- filtering commands👇🏿
+SELECT *
+SELECT * FROM
+WHERE
+- logical operators
+AND
+OR
+- pattern matching
+LIKE '__%'
+ILIKE works similar to LIKE but case sensitive doesn't require;
+IN
+BETWEEN
+- sorting
+ORDERBY DESC, ASC
+
+- pagination
+LIMIT
+OFFSET
+
+- MODIFYING
+() AS
+
+- HOW YOU CAN GET DISTINCT VALUES
+ SELECT distinct
+
+- DQL:data query lang --!!
+
+ALTER TABLE COULUME
+UPDATE SET WHERE
+DELETE FROM WHERE
+
+- DML -data manuplation language --!!
+
+- DRY RUN IN SQL !!
+SELECT * FROM <TABLE NAME>
+WHERE <VARIABLE NAME> = ''
+
+- aggregation
+count()
+count() as
+SUM()
+MIN(), MAX()
+
+- group by
+GROUP BY()
+
+- subqueires
+SELECT WHERE (SELECT) -subquery in where
+SELECT FROM (SELECT) -subquery in FROM
+SELECT EXISTS() -exists operator
+
+- having keyword-> explore and learn about having keywords.
+HAVING()
+
+-- foreign key
+<previoutablename> INT REFERENCES <previoustable>(<previoutablename>)
+ON DELETE CASCADE, SET NULL, RESTRICT
+
+- JOINS
+INNER JOIN ON
+LEFT JOIN ON
+RIGHT JOIN ON
+FULL OUTER JOIN
+
+- INDEXES
+CREATE INDEX idx<column name> ON <TABLENAME>(<column name>)
+idx in simple terms can be called as config.
+EXPLAIN ANALYZE SELECT...
+-analyze command explains how much time does postgres took for execution of 
+query
+
+** postgres creates an index table which is an internal table of actual table generated through query.
+** index table managed by system logs internally. 
+** in simple terms, index table is managed using b+ trees(balanced trees)
+
+CREATE INDEX idx_<custom-colum-name> ON <TABLENAME>(<column name>) -this actually stores memory location
+CREATE INDEX idx_<custom-colum-name> ON <TABLENAME>(<column name>) INCLUDE(<column name>) -this actually stores the data directly in system logs (disk)
+** non key value index -> CREATE INDEX idx_<custom-colum-name> ON <TABLENAME>(<column name>) INCLUDE(<column name>)
+** schema table will get locked when indexes are implemented.
+
+docker commands:
+
+docker postgres(ps)
+
+docker run -d --name <container name> -e POSTGRES_PASSWORD=<password> -p <ports> postgres:<database version>
+
+docker exec -it <docker container name> -U <username>
+\l -to the list to db's in vs code
+\c -your database_name -to connect to db
+\dt -to see the tables inside db
