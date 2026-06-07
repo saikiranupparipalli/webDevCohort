@@ -1,0 +1,5 @@
+-- ACID Property	           Meaning
+-- A Atomicity	    Transfer happens completely or not at all
+-- C Consistency	Money can't magically appear or disappear
+-- I Isolation	    Two transfers don't interfere with each other
+-- D Durability	    After COMMIT, the transfer is permanet

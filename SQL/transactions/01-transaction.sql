@@ -12,9 +12,9 @@ VALUES
 SELECT * FROM transactions;
 
 -- BEGIN
--- UPDATE transactions SET balance = balance - 500 WHERE owner = 'sai kiran';
+-- UPDATE <tablename> SET balance = balance - 500 WHERE owner = 'sai kiran';
 -- SELECT * FROM transactions;
--- UPDATE transactions SET balance = balance + 500 WHERE owner = 'sai kiran';
+-- UPDATE <tablename> SET balance = balance + 500 WHERE owner = 'charan';
 -- SELECT * FROM transactions;
 -- COMMIT 
 -- ROLLBACK
@@ -29,3 +29,5 @@ SELECT * FROM transactions;
 -- \l -to the list to db's in vs code
 -- \c -your database_name -to connect to db
 -- \dt -to see the tables inside db
+-- \ !clear
+-- \q
