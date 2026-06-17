@@ -1,0 +1,6 @@
+ms-DOS was designed way before windows introduced.(microsoft disk os)
+commands(ms-DOS) - dir, copy, move, del, cd, mkdir or md 
+
+UNIX -is an os designed for working easily with files & programs
+commands -ls, cd, mkdir, rm, grep, cat
+ 
