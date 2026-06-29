@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        background: #1e1f22;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .chat-container {
+        width: 420px;
+        height: 700px;
+        background: #2b2d31;
+        border-radius: 18px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      .chat-header {
+        background: #313338;
+        padding: 18px;
+        border-bottom: 1px solid #444;
+      }
+
+      .profile {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #5865f2;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .profile h3 {
+        color: white;
+      }
+
+      .profile span {
+        color: #34d399;
+        font-size: 14px;
+      }
+
+      .chat-body {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        background: #2b2d31;
+      }
+
+      .message {
+        max-width: 75%;
+        padding: 12px 16px;
+        border-radius: 18px;
+        line-height: 1.4;
+        font-size: 15px;
+      }
+
+      .received {
+        align-self: flex-start;
+        background: #3b3d43;
+        color: white;
+      }
+
+      .sent {
+        align-self: flex-end;
+        background: #5865f2;
+        color: white;
+      }
+
+      .chat-footer {
+        background: #313338;
+        padding: 15px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .chat-footer input {
+        flex: 1;
+        padding: 14px;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        background: #404249;
+        color: white;
+        font-size: 15px;
+      }
+
+      .chat-footer input::placeholder {
+        color: #b5bac1;
+      }
+
+      .chat-footer button {
+        width: 90px;
+        border: none;
+        border-radius: 10px;
+        background: #5865f2;
+        color: white;
+        cursor: pointer;
+        font-size: 15px;
+        transition: 0.3s;
+      }
+
+      .chat-footer button:hover {
+        background: #4752c4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-container">
+      <header class="chat-header">
+        <div class="profile">
+          <div class="avatar">S</div>
+          <div>
+            <h3>Socket Chat</h3>
+            <span>Online</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="chat-body">
+        <div class="message received">Hey 👋</div>
+
+        <div class="message sent">Hello! How are you?</div>
+
+        <div class="message received">I'm doing great.</div>
+
+        <div class="message sent">Awesome!</div>
+      </main>
+
+      <footer class="chat-footer">
+        <input type="text" placeholder="Type a message..." />
+
+        <button>Send</button>
+      </footer>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      const input = document.querySelector("input");
+      const button = document.querySelector("button");
+      const chatBody = document.querySelector(".chat-body");
+
+      button.addEventListener("click", sendMessage);
+
+      function sendMessage(text, type = 'sent') {
+        const message = document.createElement('div')
+        message.className = `message ${type}`
+        message.textContent = text
+
+        const time  = document.createElement('span')
+        time.className = 'time'
+        time.textContent = formatTime()
+        message.appendChild(time)
+ 
+        messages.appendChild(message)
+      }
+    </script>
+  </body>
+</html>
