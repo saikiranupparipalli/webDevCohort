@@ -1,0 +1,9 @@
+function css(){
+return (
+    <style>
+  body{
+    backgroundColor: 'orange'
+  }
+  
+)
+}
