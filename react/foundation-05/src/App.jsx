@@ -30,10 +30,11 @@ function App() {
     }
   }, []);
 
+
   return (<>
 <h1>Hello from react</h1>
-<h1>{status}</h1>
- 
+{/* <h1>{status}</h1> */}
+ <button onClick={()=> console.log(status)}>click</button>
   </>
   )
 }
