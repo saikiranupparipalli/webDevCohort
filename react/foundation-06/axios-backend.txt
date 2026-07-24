@@ -1,0 +1,39 @@
+User
+  │
+  ▼
+Frontend (React)
+  │
+  │ User fills the form
+  │ (email, password, etc.)
+  ▼
+User clicks Login/Register
+  │
+  ▼
+Axios
+  │
+  │ Sends HTTP request
+  ▼
+Backend (Express)
+  │
+  │ Route matches
+  │
+  ▼
+Controller
+  │
+  ├── Validate data
+  ├── Check/Create user in database
+  ├── Generate tokens (if login succeeds)
+  ▼
+Database (MongoDB)
+  │
+  ▼
+Backend sends response
+  │
+  ▼
+Axios receives response
+  │
+  ├── Store tokens (if needed)
+  ├── Update React state/UI
+  └── Show success/error message
+  ▼
+User sees the result
