@@ -12,7 +12,7 @@ export const tokenStore = {
 
   set: ({accessToken, refreshToken, user})=>{
     if(accessToken) localStorage.setItem(ACCESS_KEY, accessToken)
-    if(refreshToken) localStorage.setItem(ACCESS_KEY, refreshToken)
+    if(refreshToken) localStorage.setItem(REFRESH_KEY, refreshToken)
         if(user) localStorage.setItem(USER_KEY, JSON.stringify(user))
   },
 
