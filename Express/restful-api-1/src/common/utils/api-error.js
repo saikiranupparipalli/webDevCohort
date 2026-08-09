@@ -4,7 +4,7 @@ class ApiError extends Error{
     this.statusCode = statusCode
     this.isOperational = true
     Error.captureStackTrace(this, this.constructor)
-  }
+  } 
 
   static badRequest(message = "bad request") {
     return new ApiError(400, message)

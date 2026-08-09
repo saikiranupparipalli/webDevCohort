@@ -5,7 +5,7 @@
   "main": "index.js",
   "keywords": [],
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "node --watch server.js"
   },
   "author": "",
   "license": "ISC",
