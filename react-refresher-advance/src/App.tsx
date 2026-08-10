@@ -1,29 +1,21 @@
-import { useCountry } from "./Hooks/UseCounHook";
-
+// import { useCountry } from "./Hooks/UseCounHook";
+import { SetScore } from "./Components/setCounter";
+import * as React from "react";
 import "./App.css";
 
 function App() {
-  const [coun, setCoun, fetching] = useCountry();
-
+  // const [coun, setCoun, fetching] = useCountry();
+  const [count, setCount] = React.useState<number>(0);
   return (
-    <>
-      <h1>Hello World</h1>
-
-      <div>
-        <div>
-          <button onClick={setCoun}>fetch Now</button>
-        </div>
-        {coun ? (
-          fetching ? (
-            <h1>Loading...</h1>
-          ) : (
-            <h1>{coun.name}</h1>
-          )
-        ) : (
-          "No country found"
-        )}
+    <div className="app-container">
+      <div className="score-counter-card">
+        {new Array(count).fill(null).map((e) => (
+          <SetScore />
+        ))}
       </div>
-    </>
+      <button onClick={() => setCount(count + 1)}>Score</button>
+        
+    </div>
   );
 }
 
