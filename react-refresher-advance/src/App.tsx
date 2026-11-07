@@ -1,20 +1,17 @@
-// import { useCountry } from "./Hooks/UseCounHook";
 import { SetScore } from "./Components/setCounter";
-import * as React from "react";
 import "./App.css";
+import * as React from "react";
 
 function App() {
-  // const [coun, setCoun, fetching] = useCountry();
-  const [count, setCount] = React.useState<number>(0);
+  const [flag, setFlag] = React.useState(false);
   return (
-    <div className="app-container">
-      <div className="score-counter-card">
-        {new Array(count).fill(null).map((e) => (
-          <SetScore />
-        ))}
-      </div>
-      <button onClick={() => setCount(count + 1)}>Score</button>
-        
+    <div>
+      <button onClick={() => setFlag(!flag)}>switch</button>
+      {flag ? (
+        <SetScore playerName="virat" key={"v"} />
+      ) : (
+        <SetScore playerName="rohit" key={"r"} />
+      )}
     </div>
   );
 }
