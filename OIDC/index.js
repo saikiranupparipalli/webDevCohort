@@ -56,14 +56,85 @@ async function main() {
     });
   });
 
-  app.get("/oauth/authorize", (req, res) => {
-    // console.log(req.session.user);
-    // console.log(req.query.client_id)
+  // app.get("/oauth/authorize", (req, res) => {
+  //   // console.log(req.session.user);
+  //   // console.log(req.query.client_id)
 
-    if (req.session.user) {
+  //   if (req.session.user) {
+  //     console.log("session.user from oauth", req.session.user)
+  //     const arr = [];
+  //     const supported_scope = ["openid", "profile", "email"];
+  //     const client_scope = req.query.scope.split(" ").;
+  //     for (const n of client_scope) {
+  //       if (supported_scope.includes(n)) {
+  //         // console.log("its supported");
+  //       } else {
+  //         arr.push(n);
+  //       }
+  //     }
+
+  //     const len = arr.length;
+  //     if (len > 0) {
+  //       return res.status(400).json({
+  //         error: "invalid_scope",
+  //         error_description: "One or more requested scopes are not supported.",
+  //       });
+  //     }
+
+  //     const res_type = req.query.response_type;
+  //     if (res_type !== "code") {
+  //       return res.status(400).json({ error: "unsupported_response_type" });
+  //     }
+
+  //     const client_id = req.query.client_id;
+  //     if (client_id !== "shop-app-123") {
+  //       return res.status(400).json({
+  //         error: "unsupported_client_id",
+  //       });
+  //     }
+
+  //     const redirect_uri = req.query.redirect_uri;
+  //     if (redirect_uri !== "http://localhost:5173/callback") {
+  //       return res.status(400).json({
+  //         error: "invalid_redirect_uri",
+  //       });
+  //     }
+  //     const state = req.query.state;
+  //     if (state !== "abc123") {
+  //       return res.status(400).json({
+  //         error: "unsupported_state",
+  //       });
+  //     }
+
+  //     (auth_code.set(authorization_code, {
+  //       user: req.session.user,
+  //       client_id: client_id,
+  //       redirect_uri: redirect_uri,
+  //     }),
+  //       console.log(auth_code));
+  //   } else {
+  //     req.session.returnTo = req.originalUrl;
+
+  //     console.log("SAVED:", req.session.returnTo);
+  //     console.log("SESSION ID:", req.sessionID);
+
+  //     return res.redirect("/login");
+  //   }
+  // });
+
+  app.get("/oauth/authorize", (req, res) => {
+    if (!req.session.user) {
+      req.session.returnTo = req.originalUrl;
+
+      // console.log("SAVED:", req.session.returnTo);
+      console.log("GET SESSION ID:", req.sessionID);
+      console.log("SAVED URL:", req.session.returnTo);
+      return res.redirect("/login");
+    } else {
       const arr = [];
-      const supported_scope = ["openid", "profile", "email"];
-      const client_scope = req.query.scope.split(" ");
+      const supported_scope = ["openid", "email", "password"];
+      // const client_scope = req.query.scope.split(" ");
+      const client_scope = (req.query.scope || "").split(/\s+/).filter(Boolean);
       for (const n of client_scope) {
         if (supported_scope.includes(n)) {
           // console.log("its supported");
@@ -86,7 +157,6 @@ async function main() {
       }
 
       const client_id = req.query.client_id;
-      // console.log(client_id);
       if (client_id !== "shop-app-123") {
         return res.status(400).json({
           error: "unsupported_client_id",
@@ -112,12 +182,10 @@ async function main() {
         redirect_uri: redirect_uri,
       }),
         console.log(auth_code));
-    } else {
-      return res.redirect("/login");
     }
+    // Keep your existing code below
   });
-
-  app.get("/login", (req, res) => {
+  app.get("/login", (_, res) => {
     return res.sendFile(path.join(process.cwd(), "index.html"));
   });
 
@@ -127,11 +195,21 @@ async function main() {
       return res.status(400).json({
         error: "unauthorized",
       });
-    } else {
-      req.session.user = email;
-
-      return res.send("Login success");
     }
+    // else {
+    //   res.status(200).json({
+    //     login: "success",
+    //   });
+    // }
+    console.log("POST SESSION ID:", req.sessionID);
+    console.log("POST SAVED URL:", req.session.returnTo);
+    req.session.user = email;
+
+    const redirect = req.session.returnTo || "/";
+    console.log("post(login) url", redirect);
+    delete req.session.returnTo;
+
+    return res.redirect(redirect);
   });
 } //main
 
