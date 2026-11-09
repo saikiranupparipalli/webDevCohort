@@ -1,0 +1,143 @@
+[
+  {
+    "id": 1,
+    "quote": "Simplicity is the prerequisite for reliability.",
+    "author": "Edsger W. Dijkstra",
+    "category": "Technology",
+    "bio": "Pioneering Computer Scientist"
+  },
+  {
+    "id": 2,
+    "quote": "The only way to do great work is to love what you do.",
+    "author": "Steve Jobs",
+    "category": "Inspiration",
+    "bio": "Co-founder of Apple Inc."
+  },
+  {
+    "id": 3,
+    "quote": "We suffer more often in imagination than in reality.",
+    "author": "Seneca",
+    "category": "Philosophy",
+    "bio": "Stoic Philosopher & Statesman"
+  },
+  {
+    "id": 4,
+    "quote": "Make it work, make it right, make it fast.",
+    "author": "Kent Beck",
+    "category": "Technology",
+    "bio": "Software Engineer & Creator of Extreme Programming"
+  },
+  {
+    "id": 5,
+    "quote": "In the middle of difficulty lies opportunity.",
+    "author": "Albert Einstein",
+    "category": "Wisdom",
+    "bio": "Theoretical Physicist"
+  },
+  {
+    "id": 6,
+    "quote": "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.",
+    "author": "Antoine de Saint-Exupéry",
+    "category": "Design",
+    "bio": "Writer and Aviator"
+  },
+  {
+    "id": 7,
+    "quote": "The mind is everything. What you think you become.",
+    "author": "Buddha",
+    "category": "Wisdom",
+    "bio": "Spiritual Teacher"
+  },
+  {
+    "id": 8,
+    "quote": "Code is like humor. When you have to explain it, it’s bad.",
+    "author": "Cory House",
+    "category": "Technology",
+    "bio": "Software Architect"
+  },
+  {
+    "id": 9,
+    "quote": "The unexamined life is not worth living.",
+    "author": "Socrates",
+    "category": "Philosophy",
+    "bio": "Classical Greek Philosopher"
+  },
+  {
+    "id": 10,
+    "quote": "Creativity is intelligence having fun.",
+    "author": "Albert Einstein",
+    "category": "Creativity",
+    "bio": "Theoretical Physicist"
+  },
+  {
+    "id": 11,
+    "quote": "First, solve the problem. Then, write the code.",
+    "author": "John Johnson",
+    "category": "Technology",
+    "bio": "Software Developer"
+  },
+  {
+    "id": 12,
+    "quote": "He who has a why to live can bear almost any how.",
+    "author": "Friedrich Nietzsche",
+    "category": "Philosophy",
+    "bio": "Philosopher & Cultural Critic"
+  },
+  {
+    "id": 13,
+    "quote": "Good design is as little design as possible.",
+    "author": "Dieter Rams",
+    "category": "Design",
+    "bio": "Industrial Designer"
+  },
+  {
+    "id": 14,
+    "quote": "Talk is cheap. Show me the code.",
+    "author": "Linus Torvalds",
+    "category": "Technology",
+    "bio": "Creator of Linux & Git"
+  },
+  {
+    "id": 15,
+    "quote": "The best revenge is not to be like your enemy.",
+    "author": "Marcus Aurelius",
+    "category": "Philosophy",
+    "bio": "Roman Emperor & Stoic Philosopher"
+  },
+  {
+    "id": 16,
+    "quote": "Stay hungry, stay foolish.",
+    "author": "Whole Earth Catalog",
+    "category": "Inspiration",
+    "bio": "Counterculture Publication"
+  },
+  {
+    "id": 17,
+    "quote": "Design is not just what it looks like and feels like. Design is how it works.",
+    "author": "Steve Jobs",
+    "category": "Design",
+    "bio": "Co-founder of Apple Inc."
+  },
+  {
+    "id": 18,
+    "quote": "It is not that we have a short time to live, but that we waste a lot of it.",
+    "author": "Seneca",
+    "category": "Wisdom",
+    "bio": "Stoic Philosopher"
+  },
+  {
+    "id": 19,
+    "quote": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+    "author": "Martin Fowler",
+    "category": "Technology",
+    "bio": "Software Developer & Author"
+  },
+  {
+    "id": 20,
+    "quote": "Action is the foundational key to all success.",
+    "author": "Pablo Picasso",
+    "category": "Creativity",
+    "bio": "Painter & Sculptor"
+  }
+]
+
