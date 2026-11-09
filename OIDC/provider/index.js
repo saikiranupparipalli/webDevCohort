@@ -3,9 +3,10 @@ import path from "node:path";
 import session from "express-session";
 import { kid, jwk } from "./keys.js";
 import authorization_code from "./services.js";
-
+import cors from "cors";
 const app = express();
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(
   session({
     secret: "your-secret-key",
@@ -16,6 +17,12 @@ app.use(
       secure: false,
       sameSite: "lax",
     },
+  }),
+);
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
   }),
 );
 const auth_code = new Map();
@@ -34,7 +41,7 @@ async function main() {
   app.get("/.well-known/openid-configuration", (_, res) => {
     return res.send({
       issuer: "https://localhost:3000",
-      authorization_endpoint: "https://accounts.google.com/o/oauth2/v2/auth",
+      authorization_endpoint: "https://localhost:8000/oauth/token",
       token_endpoint: "https://oauth2.googleapis.com/token",
       userinfo_endpoint: "https://openidconnect.googleapis.com/v1/userinfo",
       jwks_uri: "http://.well-known/jwks.json",
@@ -97,7 +104,7 @@ async function main() {
       }
 
       const redirect_uri = req.query.redirect_uri;
-      if (redirect_uri !== "http://localhost:5173/callback") {
+      if (redirect_uri !== "http://localhost:5173/callback.html") {
         return res.status(400).json({
           error: "invalid_redirect_uri",
         });
@@ -147,12 +154,60 @@ async function main() {
     return res.redirect(redirect);
   });
 
+  // HTTP method used by client to send authorization code should match with backend.
+  // that is the reason why we use POST method in /oauth/token
   app.post("/oauth/token", (req, res) => {
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("code");
-    console.log("Authorization code:", code);
+    const { code, grant_type, client_id, redirect_uri } = req.body;
+    console.log("Content-Type:", req.headers["content-type"]);
+    console.log("Request body:", req.body);
+
+    const stored_code = auth_code.get(code);
+    console.log('stored_code', stored_code)
+    // const stored_user = stored_code.user;
+    const stored_clientid = stored_code.client_id;
+    const stored_redirecturl = stored_code.redirect_uri;
+    if (!stored_code) {
+      return res.status(400).json({
+        message: "not found Authorization code",
+      });
+    }
+    // if (!stored_user) {
+    //   return res.status(400).json({
+    //     message: "not found user",
+    //   });
+    // }
+    if (!stored_clientid) {
+      return res.status(400).json({
+        message: "not found client_id",
+      });
+    }
+    if (!stored_redirecturl) {
+      return res.status(400).json({
+        message: "not found redirect_url",
+      });
+    }
+
+
+    if(grant_type !== "authorization_ code"){
+       return res.status(400).json({
+        message: "incorrect authorization Code",
+      });
+    }
+    if(client_id !== stored_clientid){
+       return res.status(400).json({
+        message: "incorrect client_id",
+      });
+    }
+    if(redirect_uri !== stored_redirecturl){
+       return res.status(400).json({
+        message: "incorrect redirect_uri",
+      });
+    }
+    auth_code.delete(code);
+    return res.json({
+      message: "request received",
+    });
   });
-  
 
 } //main
 

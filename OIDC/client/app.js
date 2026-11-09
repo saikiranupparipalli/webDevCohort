@@ -5,57 +5,58 @@ const FALLBACK_QUOTES = [
     quote: "Simplicity is the prerequisite for reliability.",
     author: "Edsger W. Dijkstra",
     category: "Technology",
-    bio: "Pioneering Computer Scientist"
+    bio: "Pioneering Computer Scientist",
   },
   {
     id: 2,
     quote: "The only way to do great work is to love what you do.",
     author: "Steve Jobs",
     category: "Inspiration",
-    bio: "Co-founder of Apple Inc."
+    bio: "Co-founder of Apple Inc.",
   },
   {
     id: 3,
     quote: "We suffer more often in imagination than in reality.",
     author: "Seneca",
     category: "Philosophy",
-    bio: "Stoic Philosopher & Statesman"
+    bio: "Stoic Philosopher & Statesman",
   },
   {
     id: 4,
     quote: "Make it work, make it right, make it fast.",
     author: "Kent Beck",
     category: "Technology",
-    bio: "Creator of Extreme Programming"
+    bio: "Creator of Extreme Programming",
   },
   {
     id: 5,
     quote: "In the middle of difficulty lies opportunity.",
     author: "Albert Einstein",
     category: "Wisdom",
-    bio: "Theoretical Physicist"
+    bio: "Theoretical Physicist",
   },
   {
     id: 6,
-    quote: "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.",
+    quote:
+      "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.",
     author: "Antoine de Saint-Exupéry",
     category: "Design",
-    bio: "Writer and Aviator"
+    bio: "Writer and Aviator",
   },
   {
     id: 7,
     quote: "Good design is as little design as possible.",
     author: "Dieter Rams",
     category: "Design",
-    bio: "Industrial Designer"
+    bio: "Industrial Designer",
   },
   {
     id: 8,
     quote: "Talk is cheap. Show me the code.",
     author: "Linus Torvalds",
     category: "Technology",
-    bio: "Creator of Linux & Git"
-  }
+    bio: "Creator of Linux & Git",
+  },
 ];
 
 // App State
@@ -87,12 +88,12 @@ const viewFavoritesBtn = document.getElementById("view-favorites-btn");
 const closeModalBtn = document.getElementById("close-modal-btn");
 const favoritesList = document.getElementById("favorites-list");
 const favoritesCount = document.getElementById("favorites-count");
-
+const loginbutton = document.getElementById("login");
 // Initialize application
 async function initApp() {
   loadThemePreference();
   loadFavorites();
-  
+
   try {
     const res = await fetch("quotes.json");
     if (res.ok) {
@@ -112,16 +113,18 @@ async function initApp() {
 // Category Pills Rendering
 function renderCategories() {
   const categorySet = new Set(["All"]);
-  quotes.forEach(q => categorySet.add(q.category));
+  quotes.forEach((q) => categorySet.add(q.category));
 
   categoriesContainer.innerHTML = "";
-  categorySet.forEach(cat => {
+  categorySet.forEach((cat) => {
     const btn = document.createElement("button");
     btn.className = `cat-pill ${cat === currentCategory ? "active" : ""}`;
     btn.textContent = cat;
     btn.addEventListener("click", () => {
       currentCategory = cat;
-      document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
+      document
+        .querySelectorAll(".cat-pill")
+        .forEach((p) => p.classList.remove("active"));
       btn.classList.add("active");
       displayNextQuote();
     });
@@ -131,16 +134,17 @@ function renderCategories() {
 
 // Filter and Display Next Quote
 function displayNextQuote() {
-  const filtered = currentCategory === "All" 
-    ? quotes 
-    : quotes.filter(q => q.category === currentCategory);
+  const filtered =
+    currentCategory === "All"
+      ? quotes
+      : quotes.filter((q) => q.category === currentCategory);
 
   if (filtered.length === 0) return;
 
   // Pick a random quote that isn't the current one (if possible)
   let candidate = filtered[Math.floor(Math.random() * filtered.length)];
   if (filtered.length > 1 && currentQuote && candidate.id === currentQuote.id) {
-    const others = filtered.filter(q => q.id !== currentQuote.id);
+    const others = filtered.filter((q) => q.id !== currentQuote.id);
     candidate = others[Math.floor(Math.random() * others.length)];
   }
 
@@ -166,7 +170,7 @@ function displayNextQuote() {
 
 // Update Favorite Button State
 function updateFavoriteButtonState() {
-  const isFav = currentQuote && favorites.some(f => f.id === currentQuote.id);
+  const isFav = currentQuote && favorites.some((f) => f.id === currentQuote.id);
   if (isFav) {
     favBtn.classList.add("active");
   } else {
@@ -199,7 +203,7 @@ function updateFavoritesBadge() {
 function toggleFavorite() {
   if (!currentQuote) return;
 
-  const index = favorites.findIndex(f => f.id === currentQuote.id);
+  const index = favorites.findIndex((f) => f.id === currentQuote.id);
   if (index > -1) {
     favorites.splice(index, 1);
     showToast("Removed from saved quotes");
@@ -219,7 +223,7 @@ function renderFavoritesModal() {
   }
 
   favoritesList.innerHTML = "";
-  favorites.forEach(fav => {
+  favorites.forEach((fav) => {
     const item = document.createElement("div");
     item.className = "fav-item";
     item.innerHTML = `
@@ -236,7 +240,7 @@ function renderFavoritesModal() {
     `;
 
     item.querySelector(".fav-remove-btn").addEventListener("click", () => {
-      favorites = favorites.filter(f => f.id !== fav.id);
+      favorites = favorites.filter((f) => f.id !== fav.id);
       saveFavorites();
       updateFavoriteButtonState();
       renderFavoritesModal();
@@ -273,7 +277,9 @@ function readQuoteAloud() {
   }
 
   window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(`${currentQuote.quote}. By ${currentQuote.author}`);
+  const utterance = new SpeechSynthesisUtterance(
+    `${currentQuote.quote}. By ${currentQuote.author}`,
+  );
   utterance.rate = 0.95;
   utterance.pitch = 1.0;
   window.speechSynthesis.speak(utterance);
@@ -333,6 +339,22 @@ function setupEventListeners() {
   shareBtn.addEventListener("click", shareQuote);
   themeToggle.addEventListener("click", toggleTheme);
 
+  // LOGIN OIDC CONFIGURATION:
+  loginbutton.addEventListener("click", () => {
+    // window.alert("Hello from login button")
+    const authorizationURL = new URL("http://localhost:8000/oauth/authorize");
+
+    authorizationURL.searchParams.set("client_id", "shop-app-123");
+    authorizationURL.searchParams.set(
+      "redirect_uri",
+      "http://localhost:5173/callback.html",
+    );
+    authorizationURL.searchParams.set("response_type", "code");
+    authorizationURL.searchParams.set("scope", "openid email");
+    authorizationURL.searchParams.set("state", "abc123");
+
+    window.location.href = authorizationURL.toString();
+  });
   // Favorites Modal
   viewFavoritesBtn.addEventListener("click", () => {
     renderFavoritesModal();
@@ -367,4 +389,3 @@ function setupEventListeners() {
 
 // Start
 initApp();
-
