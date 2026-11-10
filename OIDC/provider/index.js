@@ -1,7 +1,7 @@
 import express from "express";
 import path from "node:path";
 import session from "express-session";
-import { kid, jwk } from "./keys.js";
+import { pb_k } from "./keys.js";
 import authorization_code from "./services.js";
 import cors from "cors";
 const app = express();
@@ -52,12 +52,12 @@ async function main() {
     return res.send({
       keys: [
         {
-          kid: kid,
+          kid: pb_k.kid,
           use: "sig",
           alg: "RS256",
-          kty: jwk.kty,
-          e: jwk.e,
-          n: jwk.n,
+          kty: pb_k.kty,
+          e: pb_k.e,
+          n: pb_k.n,
         },
       ],
     });
